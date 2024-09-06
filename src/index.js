@@ -9,7 +9,7 @@ const root = createRoot(container)
 
 const ProvisionedApp = () => (
   <CssVarsProvider theme={ theme }>
-   <BrowserRouter >
+   <BrowserRouter basename="/knit-test">
       <App />
     </BrowserRouter>
   </CssVarsProvider>
