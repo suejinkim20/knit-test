@@ -1,5 +1,5 @@
-import { Fragment } from 'react'
-import { Routes, Route } from 'react-router-dom'
+import { Fragment, useEffect } from 'react'
+import { Routes, Route, useNavigate } from 'react-router-dom'
 import { Menu } from '@components/menu'
 import {
   AgendaView,
@@ -10,7 +10,6 @@ import {
   RegistrationView,
   TravelView,
 } from './views'
-
 import { Header, Footer } from '@components/layout'
 
 const menuOptions = [
@@ -41,32 +40,34 @@ const menuOptions = [
   }
 ]
 
-//
-
 export const App = () => {
+  const navigate = useNavigate();
+
+  useEffect(() => {
+    const params = new URLSearchParams(window.location.search);
+    const path = params.get('');
+    if (path) {
+      navigate('/' + path, { replace: true });
+    }
+  }, [navigate]);
+
   return (
     <Fragment>
       <Header />
-      <Menu options={ menuOptions } />
+      <Menu options={menuOptions} />
       <main>
         <Routes>
-          {
-            // we'll build the routes from the main menu items.
-            // note this implementation only supports a flat,
-            // one-level navigation structure.
-            menuOptions.map(({ path, view, label }) => (
-              <Route
-                key={ `route-${ label }` }
-                path={ path }
-                element={ view }
-              />
-            ))
-          }
-          <Route path="__markdown" element={ <MarkdownView /> } />
-          <Route path="*" element={ <NotFoundView /> } />
+          {menuOptions.map(({ path, view, label }) => (
+            <Route
+              key={`route-${label}`}
+              path={path}
+              element={view}
+            />
+          ))}
+          <Route path="__markdown" element={<MarkdownView />} />
+          <Route path="*" element={<NotFoundView />} />
         </Routes>
       </main>
-
       <Footer />
     </Fragment>
   )
