@@ -11,6 +11,7 @@
     const path = location.pathname.substr(1);
     if (path && path !== '') {
       location.replace('/#/' + path);
+      window.alert("path", path, "pathname", location.pathname)
     } else {
       location.replace('/#/');
     }
