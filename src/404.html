@@ -5,15 +5,17 @@
   <meta charset="utf-8" />
 
   <title>FABRIC KNIT Workshop 404</title>
-  <meta http-equiv="refresh" content="0; URL='/knit-test'">
 
+  <meta http-equiv="refresh" content="0; URL='/Knit-test'">
   <script>
-    if (location.pathname !== '/') {
-      location.replace('/knit-test/?' + location.pathname.substr(1).split("/")[1]);
-      window.alert(location.pathname.substr(1).split("/")[1])
+    const path = location.pathname.substr(1);
+    if (path && path !== '') {
+      location.replace('/#/' + path);
+      window.alert("path", path, "pathname", location.pathname)
     } else {
-      location.replace('/');
-    }  </script>
+      location.replace('/#/');
+    }
+  </script>
 
 </head>
 
