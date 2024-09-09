@@ -7,15 +7,21 @@
   <title>FABRIC KNIT Workshop 404</title>
 
   <meta http-equiv="refresh" content="0; URL='/Knit-test'">
-  <script>
-    const path = location.pathname.substr(1);
-    if (path && path !== '') {
-      location.replace('/#/' + path);
-    } else {
-      location.replace('/#/');
+  <script type="text/javascript">
+    // Check if there is a redirect present in the query string
+    var redirect = window.location.search.slice(1)
+      .split('&')
+      .filter(function (param) { return param.split('=')[0] === 'redirect'; })[0];
+  
+    // If there's a redirect, fix the URL
+    if (redirect) {
+      window.history.replaceState(null, null, redirect.split('=')[1]);
     }
+  
+    // Redirect to the index.html page
+    window.location.replace('/index.html');
   </script>
-
+  
 </head>
 
 <body>
